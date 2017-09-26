@@ -7,24 +7,17 @@ import {Routes, RouterModule} from '@angular/router';
 // Layouts
 import {FullLayoutComponent} from './layouts/full-layout.component';
 import {LoginComponent} from "./login/login.component";
-import {CanActivateViaAuthGuard} from "./shared/services/guards/auth-guard.service";
 
 export const routes: Routes = [
   {
     path: '',
     component: FullLayoutComponent,
     children: [
-      { path: 'session', loadChildren: "./manage-session/manage-session.module#ManageSessionModule"},
-
-      {path: 'stageadmin',
-      loadChildren: "./Stage-Administration/Stage-Administration.module#StageAdministrationModule"
+      {
+        path: 'stageadmin',
+        loadChildren: "./Stage-Administration/Stage-Administration.module#StageAdministrationModule"
       }
-
-
     ],
-
-
-
 
 
     /*canActivate: [

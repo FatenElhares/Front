@@ -12,14 +12,9 @@ import {HttpModule} from "@angular/http";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {LaddaModule} from "angular2-ladda";
-import {ManageSessionModule} from "./manage-session/manage-session.module";
-import {ExamenService} from "app/shared/services/examen.service";
-import {SessionService} from "app/shared/services/session.service";
 import {StageService} from "app/shared/services/stage.service";
-import {StationService} from "./shared/services/station.service";
 import {SharedService} from "./shared/services/shared.service";
-import {BanqueService} from "./shared/services/banque.service";
-import {EtudiantService} from "./shared/services/etudiant.service";
+import {StageAdministrationModule} from "./Stage-Administration/Stage-Administration.module";
 
 
 @NgModule({
@@ -34,20 +29,15 @@ import {EtudiantService} from "./shared/services/etudiant.service";
     AppRoutingModule,
     BrowserModule,
     LaddaModule,
-    ManageSessionModule,
-    HttpModule
+    HttpModule,
+    StageAdministrationModule
   ],
   providers: [
     AuthService,
     CanActivateViaAuthGuard,
     StorageService,
-    SessionService,
     StageService,
-    ExamenService,
-    StationService,
-    BanqueService ,
-    SharedService,
-    EtudiantService
+    SharedService
   ],
   bootstrap: [AppComponent]
 })

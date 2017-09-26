@@ -27,7 +27,7 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
 
   hopitaux: Hopital[] = [];
   enseignants: Enseignant [] = [];
-  service: Service[] = [];
+  services: Service[] = [];
 
 
   stage: Stage = new Stage();
