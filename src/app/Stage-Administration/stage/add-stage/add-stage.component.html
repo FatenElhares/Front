@@ -1,4 +1,4 @@
-<!-- Form horizontal -->
+i<!-- Form horizontal -->
 <div class="panel panel-flat">
   <div class="panel-heading">
     <h5 class="panel-title">Ajouter Stage</h5>
@@ -19,11 +19,13 @@
           <label class="control-label">Nom Session : </label>
           <input [(ngModel)]="session.nom" name="nom" type="text" class="form-control">
         </div>
-        <div class="form-group col-md-6">
-          <label>Hopital</label>
-          <select name="hopital" class="select-hopital">
-            <option value="0" disabled>Choisir un Hopital</option>
-            <option *ngFor="let item of hopitals" value="{{item.id_Hopital}}">
+
+
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Hopital :</label>
+          <select name="enseignant" class="select-enseignant">
+            <option value="0">Choisir un Hopital</option>
+            <option *ngFor="let item of enseignants;let i=index" value="{{i}}">
               {{item.nom}}
             </option>
           </select>
@@ -48,8 +50,8 @@
       </div>
 
       <div class="row">
-        <div class="form-group col-md-6">
-          <label>Enseignant Responsable</label>
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Enseignant Responsable : </label>
           <select name="enseignant" class="select-enseignant">
             <option value="0">Choisir enseignant responsable</option>
             <option *ngFor="let item of enseignants;let i=index" value="{{i}}">
@@ -58,8 +60,8 @@
           </select>
         </div>
 
-        <div class="form-group col-md-6">
-          <label>Service</label>
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Service : </label>
           <select name="service" class="select-service">
             <option value="0">Choisir un service</option>
             <option *ngFor="let item of services;let i=index" value="{{i}}">
@@ -70,10 +72,47 @@
 
       </div>
 
+      <div class="row">
+            <div class="form-group col-md-6">
+              <label>Etudiant</label>
+              <select name="etudiant" class="select-etudiant">
+                <option value="0">Choisir un étudiant </option>
+                <option *ngFor="let item of etudiants;let i=index" value="{{i}}">
+                  {{item.nom}} {{item.prenom}} {{item.prenom}}
+                </option>
+              </select>
+            </div>
+            <!-- Bordered striped table -->
+            <div class="col-md-6">
+              <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>CIN</th>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of selectedEnseignants;let i=index">
+                  <td>{{item.id_Etudiant}}</td>
+                  <td>{{item.CIN}}</td>
+                  <td>{{item.nom}} {{item.prenom}}</td>
+                  <td>
+                    <a (click)="removeSelectedEtudiant(i)" data-popup="tooltip" title="Remove"><i class="icon-trash"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /bordered striped table -->
+          </div>
 
+
+<br><br>
 
       <div class="row text-center">
-        <button type="submit" (click)="addSession()" class="btn btn-primary">Ajouter Stage <i
+        <button type="submit" (click)="addStage()" class="btn btn-primary">Ajouter Stage <i
           class="icon-arrow-right14 position-right"></i></button>
       </div>
     </form>

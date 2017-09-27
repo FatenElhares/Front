@@ -1,22 +1,22 @@
-/**
- * Created by Abbes on 21/06/2017.
- */
-/**
- * Created by Abbes on 16/06/2017.
- */
+
 import {Component, OnInit, AfterContentInit, OnDestroy} from '@angular/core';
 
+import {StageService} from "../../../shared/services/stage.service";
 import {SharedService} from "../../../shared/services/shared.service";
 
-import {StageService} from "../../../shared/services/stage.service";
+
+import {Service} from "../../../shared/models/service";
+import {Hopital} from "../../../shared/models/hopital";
+
+
 import {Stage} from "../../../shared/models/stage";
+import {StageDTO} from "../../../shared/models/stage";
 
 import {Enseignant} from "../../../shared/models/enseignant";
-import {Hopital} from "../../../shared/models/hopital";
-import {Service} from "../../../shared/models/service";
+import {Etudiant} from "../../../shared/models/etudiant";
 
 
-import {Subscription} from "rxjs/Rx"
+import {Subscription} from "rxjs/Rx";
 declare var jQuery: any;
 @Component({
   templateUrl: 'add-stage.component.html',
@@ -25,14 +25,17 @@ declare var jQuery: any;
 })
 export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  hopitaux: Hopital[] = [];
-  enseignants: Enseignant [] = [];
   services: Service[] = [];
+  hopitaux: Hopital[] = [];
+  stage: StageDTO = new StageDTO();
+  enseignants: Enseignant [] = [];
 
-
-  stage: Stage = new Stage();
+  etudiants: Etudiant [] = [];
 
   selectedEnseignants: Enseignant[] = [];
+selectedEtudiantss: Etudiant[] = [];
+
+
 
   busy: Subscription;
 
@@ -40,12 +43,19 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
     const baseContext = this;
     const selectService = jQuery(".select-service");
     const selectEnseignant = jQuery(".select-enseignant");
+    const selectEtudiant = jQuery(".select-etudiant");
+
+
 
     this.getAllServices();
     this.getAllEnseignants();
+    this.getAllEtudiants();
 
     selectService.select2();
     selectEnseignant.select2();
+
+selectEtudiant.select2();
+
 
 
     selectEnseignant.on('change', function () {
@@ -53,6 +63,16 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
       const pos = parseInt(selectEnseignant.val());
       baseContext.selectedEnseignants.push(baseContext.enseignants[pos]);
     });
+
+    selectEtudiant.on('change', function () {
+
+      const pos = parseInt(selectEtudiant.val());
+      baseContext.selectedEtudiants.push(baseContext.etudiants[pos]);
+    });
+
+
+
+
     selectService.on("change", function () {
       baseContext.stage.id_Service = parseInt(selectService.val());
     });
@@ -63,10 +83,9 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
     jQuery(".date-fin").on("change", function () {
       baseContext.stage.date_fin = jQuery(".date-fin").val();
     })
-
   }
 
-  getAllServices() {
+  getAllServicex() {
     this.sharedService.getServices()
       .subscribe((data) => {
           this.services = data;
@@ -86,8 +105,24 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
       )
   }
 
+
+  getAllEtudiants() {
+    this.sharedService.getAllEtudiant()
+      .subscribe(
+        (data) => {
+          this.etudiants = data;
+        }
+      )
+  }
+
+
   removeSelectedEnseignant(pos) {
     this.selectedEnseignants.splice(pos, 1);
+  }
+
+
+  removeSelectedEtudiant(pos) {
+    this.selectedEtudiants.splice(pos, 1);
   }
 
   ngAfterContentInit() {
@@ -133,9 +168,15 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
     });
   }
 
+
+  setEtudiant() {
+    this.selectedEtudiants.forEach(item => {
+      this.stage.etudiants.push(item.id_Etudiant);
+    });
+  }
   addStage() {
     this.setEnseignant();
-
+this.setEtudiant();
     console.log(JSON.stringify(this.stage));
 
     this.busy = this.stageService.addStage(this.stage)
@@ -148,5 +189,6 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
         }
       )
   }
+
 
 }
