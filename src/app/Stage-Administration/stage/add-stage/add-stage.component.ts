@@ -1,4 +1,3 @@
-
 import {Component, OnInit, AfterContentInit, OnDestroy} from '@angular/core';
 
 import {StageService} from "../../../shared/services/stage.service";
@@ -33,8 +32,7 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
   etudiants: Etudiant [] = [];
 
   selectedEnseignants: Enseignant[] = [];
-selectedEtudiantss: Etudiant[] = [];
-
+  selectedEtudiants: Etudiant[] = [];
 
 
   busy: Subscription;
@@ -46,7 +44,6 @@ selectedEtudiantss: Etudiant[] = [];
     const selectEtudiant = jQuery(".select-etudiant");
 
 
-
     this.getAllServices();
     this.getAllEnseignants();
     this.getAllEtudiants();
@@ -54,8 +51,7 @@ selectedEtudiantss: Etudiant[] = [];
     selectService.select2();
     selectEnseignant.select2();
 
-selectEtudiant.select2();
-
+    selectEtudiant.select2();
 
 
     selectEnseignant.on('change', function () {
@@ -71,8 +67,6 @@ selectEtudiant.select2();
     });
 
 
-
-
     selectService.on("change", function () {
       baseContext.stage.id_Service = parseInt(selectService.val());
     });
@@ -85,7 +79,7 @@ selectEtudiant.select2();
     })
   }
 
-  getAllServicex() {
+  getAllServices() {
     this.sharedService.getServices()
       .subscribe((data) => {
           this.services = data;
@@ -174,9 +168,10 @@ selectEtudiant.select2();
       this.stage.etudiants.push(item.id_Etudiant);
     });
   }
+
   addStage() {
     this.setEnseignant();
-this.setEtudiant();
+    this.setEtudiant();
     console.log(JSON.stringify(this.stage));
 
     this.busy = this.stageService.addStage(this.stage)
