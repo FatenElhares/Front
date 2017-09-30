@@ -1,0 +1,57 @@
+<!-- Form horizontal -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">Fiche d'evaluation</h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <form class="form-horizontal" action="#">
+
+      <div class="row">
+
+            <div class="col-md-6">
+              <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Compétence</th>
+                  <th>Valeur</th>
+                  <th>Dereniére Modif</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of selectedEnseignants;let i=index">
+                  <td>{{item.id_Etudiant}}</td>
+                  <td>{{item.CIN}}</td>
+                  <td>{{item.nom}} {{item.prenom}}</td>
+                  <td>
+                    <a (click)="removeSelectedEtudiant(i)" data-popup="tooltip" title="Remove"><i class="icon-trash"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /bordered striped table -->
+          </div>
+
+
+<br><br>
+
+      <div class="row text-center">
+        <button type="submit" (click)="affStage()" class="btn btn-primary">Ajouter Commentaire <i
+          class="icon-arrow-right14 position-right"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- /form horizontal -->

@@ -1,6 +1,3 @@
-/**
- * Created by Abbes on 13/06/2017.
- */
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
@@ -16,6 +13,14 @@ export const routes: Routes = [
       {
         path: 'stageadmin',
         loadChildren: "./Stage-Administration/Stage-Administration.module#StageAdministrationModule"
+      },
+      {
+        path: 'stageenseig',
+        loadChildren: "./Stage-Enseignant/Stage-Enseignant.module#StageEnseignantModule"
+      },
+      {
+        path: 'stageetudiant',
+        loadChildren: "./Stage-Etudiant/Stage-Etudiant.module#StageEtudiantModule"
       }
     ],
 

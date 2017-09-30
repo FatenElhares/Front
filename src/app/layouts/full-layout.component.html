@@ -275,12 +275,29 @@
               <ul class="navigation navigation-main navigation-accordion">
                 <!-- Stages -->
                 <li>
-                  <a href="#"><i class="icon-pencil3"></i> <span>Stage Administration</span></a>
+                  <a href="#"><i class="icon-pencil3"></i> <span>Espace Administration</span></a>
                   <ul>
                     <li><a href [routerLink]="['/stageadmin/list']">List Stages</a></li>
                     <li><a href [routerLink]="['/stageadmin/add']">Affecter Stage</a></li>
                   </ul>
                 </li>
+
+                <li>
+                  <a href="#"><i class="icon-pencil3"></i> <span>Espace Enseignant</span></a>
+                  <ul>
+                    <li><a href [routerLink]="['/stageenseig/list']">List Stages</a></li>
+                    <li><a href [routerLink]="['/stageenseig/edit']">Evaluer un Stage</a></li>
+                  </ul>
+                </li>
+
+                <li>
+                  <a href="#"><i class="icon-pencil3"></i> <span>Espace Etudiant</span></a>
+                  <ul>
+                    <li><a href [routerLink]="['/stageetudiant/list']">List Stage</a></li>
+                    <li><a href [routerLink]="['/stageetudiant/aff']">Fiche Evaluation</a></li>
+                  </ul>
+                </li>
+
               </ul>
             </div>
           </div>

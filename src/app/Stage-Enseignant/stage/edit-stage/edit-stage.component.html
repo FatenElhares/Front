@@ -1,0 +1,90 @@
+<!-- Form horizontal -->
+<div class="panel panel-flat">
+  <div class="panel-heading">
+    <h5 class="panel-title">Evaluer un Stage </h5>
+    <div class="heading-elements">
+      <ul class="icons-list">
+        <li><a data-action="collapse"></a></li>
+        <li><a data-action="reload"></a></li>
+        <li><a data-action="close"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <form class="form-horizontal" action="#">
+      <div class="row">
+
+
+
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Etudiant :</label>
+          <select name="etudiant" class="select-etudiant">
+            <option value="0">Choisir un Etudiant</option>
+            <option *ngFor="let item of etudiants;let i=index" value="{{i}}">
+              {{item.nom}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Stage :</label>
+          <br>
+          <select name="stage" class="select-stage">
+            <option value="0">Choisir un stage</option>
+            <option *ngFor="let item of stagess;let i=index" value="{{i}}">
+              {{item.date-fin}}
+            </option>
+          </select>
+        </div>
+
+
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Date debut: </label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+            <input type="text" class="form-control date-df date-debut">
+          </div>
+        </div>
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Date fin: </label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+            <input name="dateTest" type="text" class="form-control date-df date-fin">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+      </div>
+
+      <div class="row">
+            <div class="form-group col-md-6">
+              <label>xxx</label>
+              <select name="etudiant" class="select-etudiant">
+                <option value="0">Choisir un étudiant </option>
+                <option *ngFor="let item of etudiants;let i=index" value="{{i}}">
+                  {{item.nom}} {{item.prenom}} {{item.prenom}}
+                </option>
+              </select>
+            </div>
+
+          </div>
+
+
+<br><br>
+
+      <div class="row text-center">
+        <button type="submit" (click)="EditStage()" class="btn btn-primary">Ajouter Stage <i
+          class="icon-arrow-right14 position-right"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- /form horizontal -->
