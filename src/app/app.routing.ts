@@ -11,7 +11,7 @@ export const routes: Routes = [
     component: FullLayoutComponent,
     children: [
       {
-        path: 'stageadmin',
+        path: 'Stage',
         loadChildren: "./Stage-Administration/Stage-Administration.module#StageAdministrationModule"
       },
       {

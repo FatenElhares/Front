@@ -25,12 +25,15 @@ export class StageService extends GenericService {
     this.headers.set("Authorization", "Bearer " + this.stoarageService.read("token"));
     const url = Config.baseUrl + "/stage";
 
+
     return this.http.get(url, {
       headers: this.headers
     })
       .map(res => res.json())
       .catch(this.handleErrors);
   }
+
+
 
   addStage(stage: Stage) {
     this.headers.set("Authorization", "Bearer " + this.stoarageService.read("token"));

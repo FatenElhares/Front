@@ -5,11 +5,11 @@ import {Utils} from "app/shared/utils";
 declare var jQuery:any;
 
 @Component({
-  templateUrl: 'list-stages.component.html',
+  templateUrl: 'list-archive.component.html',
   styleUrls: [],
 
 })
-export class ListStagesComponent implements OnInit {
+export class ArchiveComponent implements OnInit {
 
   stages: Stage[] = [];
 
@@ -21,6 +21,7 @@ export class ListStagesComponent implements OnInit {
 
   constructor(private stageService: StageService) {
     this.initializeSelectAdmin();
+
   }
 
   getListStages() {
@@ -57,5 +58,6 @@ export class ListStagesComponent implements OnInit {
       //  Utils.reInitializeDataTables(50, 6);
       });
     }
+
 
 }
