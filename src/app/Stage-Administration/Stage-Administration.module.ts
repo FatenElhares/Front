@@ -12,9 +12,14 @@ import {ArchiveComponent} from "app/Stage-Administration/stage/list-archive/list
 
 import {CommonModule} from "@angular/common";
 import {AddStageComponent} from "./stage/add-stage/add-stage.component";
+
+import {AddStageEtudiantComponent} from "./stage/add-stage-etudiant/add-stage-etudiant.component";
+
+
+
 import {DateTimePickerModule} from 'ng-pick-datetime';
 import {BusyModule} from 'angular2-busy';
-
+import {MatCheckboxModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -22,12 +27,14 @@ import {BusyModule} from 'angular2-busy';
     FormsModule,
     DateTimePickerModule,
     StageAdministrationRoutingModule,
-    BusyModule
+    BusyModule,
+    MatCheckboxModule
   ],
   declarations: [
     ListStagesComponent,
     AddStageComponent,
     ArchiveComponent,
+    AddStageEtudiantComponent,
   ],
   providers: []
 })

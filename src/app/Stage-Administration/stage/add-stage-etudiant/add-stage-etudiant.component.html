@@ -1,0 +1,52 @@
+
+<h2 class="example-h2">Liste des Etudiants </h2>
+
+
+
+
+<br> <br>
+      <table class="table datatable-html">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Affectation</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Niveau</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let etudiant of etudiants">
+          <td>{{etudiant.id_Etudiant}}</td>
+          <td>
+
+            <mat-card>
+              <mat-card-content>
+                <section class="example-section">
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Checked</mat-checkbox>
+
+
+                </section>
+              </mat-card-content>
+            </mat-card>
+
+</td>
+          <td><span class="label label-info">{{etudiant.nom}}</span></td>
+          <td><span class="label label-info">{{etudiant.prenom}}</span></td>
+          <td><span class="label label-info">{{etudiant.id_Niveau}}</span></td>
+        </tr>
+        </tbody>
+      </table>
+
+
+
+
+
+<br> <br>
+
+
+
+            <form method="get" [routerLink]="['/Stage/add/etudiant']" >
+              <button type="submit" class="btn btn-primary">Ajouter Stage
+                <i class="icon-arrow-right14 position-right"></i></button>
+            </form>

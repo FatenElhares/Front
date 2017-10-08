@@ -17,8 +17,6 @@ public id_Stage: number;
   public id_Enseignant: number;
   public id_Hopital: number;
   public id_Service: number;
-
   public enseignants: number[] = [];
   public etudiants: number[] = [];
-
 }

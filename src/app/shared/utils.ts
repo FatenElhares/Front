@@ -1,11 +1,6 @@
 import {Item} from "./models/Banque/item";
-/**
- * Created by Abbes on 30/06/2017.
- */
+
 declare var jQuery: any;
-/**
- * Created by Vyndee on 27/03/2017.
- */
 export class Utils {
 
 
@@ -84,4 +79,3 @@ export class Utils {
     }, {});
   };
 }
-

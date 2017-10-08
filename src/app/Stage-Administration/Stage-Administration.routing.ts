@@ -8,6 +8,12 @@ import {ArchiveComponent} from "./stage/list-archive/list-archive.component";
 import {AddStageComponent} from "./stage/add-stage/add-stage.component";
 
 
+import {AddStageEtudiantComponent} from "./stage/add-stage-etudiant/add-stage-etudiant.component";
+
+
+
+
+
 export const routes: Routes = [
   {
     path: '',
@@ -16,6 +22,7 @@ export const routes: Routes = [
         path: 'list',
         component: ListStagesComponent
       },
+
 
       {
         path: 'archive',
@@ -26,6 +33,13 @@ export const routes: Routes = [
         path: 'add',
         component: AddStageComponent
       },
+
+      {
+
+      path: 'add/etudiant',
+      component: AddStageEtudiantComponent
+    },
+
 
     ]
   }

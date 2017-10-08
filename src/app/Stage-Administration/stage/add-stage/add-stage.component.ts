@@ -1,6 +1,10 @@
 import {Component, OnInit, AfterContentInit, OnDestroy} from '@angular/core';
 
 import {StageService} from "../../../shared/services/stage.service";
+
+
+import {EtudiantService} from "../../../shared/services/etudiant.service";
+
 import {SharedService} from "../../../shared/services/shared.service";
 
 

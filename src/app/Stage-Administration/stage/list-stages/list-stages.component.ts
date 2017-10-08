@@ -21,16 +21,19 @@ export class ListStagesComponent implements OnInit {
 
   constructor(private stageService: StageService) {
     this.initializeSelectAdmin();
-  }
+    }
 
   getListStages() {
 
     this.stageService.getListStages()
       .subscribe(
         (stages) => {
-          this.stages = stages.data;
           this.fixStages = stages.data;
-          Utils.initializeDataTables(300, 7, 5);
+          this.fixStages.forEach(stage => {
+            if (stage.date_fin >"2") {
+                this.stages.push(stage);
+            }
+          });
         },
         (error) => {
 

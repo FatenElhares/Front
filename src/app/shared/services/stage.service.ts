@@ -1,9 +1,3 @@
-/**
- * Created by Abbes on 16/06/2017.
- */
-/**
- * Created by Abbes on 16/06/2017.
- */
 import {Http} from '@angular/http';
 import {GenericService} from './generic.service';
 import {Config} from '../config';
@@ -25,7 +19,6 @@ export class StageService extends GenericService {
     this.headers.set("Authorization", "Bearer " + this.stoarageService.read("token"));
     const url = Config.baseUrl + "/stage";
 
-
     return this.http.get(url, {
       headers: this.headers
     })
@@ -33,6 +26,27 @@ export class StageService extends GenericService {
       .catch(this.handleErrors);
   }
 
+
+  getListEnseignants() {
+    this.headers.set("Authorization", "Bearer " + this.stoarageService.read("token"));
+    const url = Config.baseUrl + "/enseignant";
+    return this.http.get(url, {
+      headers: this.headers
+    })
+      .map(res => res.json())
+      .catch(this.handleErrors);
+  }
+
+
+  getListEtudiants() {
+    this.headers.set("Authorization", "Bearer " + this.stoarageService.read("token"));
+    const url = Config.baseUrl + "/etudiant";
+    return this.http.get(url, {
+      headers: this.headers
+    })
+      .map(res => res.json())
+      .catch(this.handleErrors);
+  }
 
 
   addStage(stage: Stage) {

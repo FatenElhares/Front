@@ -27,29 +27,23 @@
 
       <div class="panel-body">
         <div class="row">
-          <div *ngIf="isAdmin" class="form-group col-md-4">
-            <label>Scholaritssssssssssssssssssssssssssssé</label>
-            <select name="niveau" class="select-evaluateur">
-              <option value="0">Tous</option>
-              <option *ngFor="let item of evaluateurs" value="{{item.id_admin}}">
-                {{item.name}}
-              </option>
-            </select>
-          </div>
-          <div class="form-group col-md-4">
-            <label>Enseignant</label>
+
+
+
+          <div class="form-group col-md-6" style="    margin-right: 10px;">
+            <label>Enseignants :</label>
             <select name="enseignant" class="select-enseignant">
               <option value="0">Tous les Enseignants</option>
-              <option *ngFor="let enseignant of Enseignants" value="{{enseignant.id_level}}">
-                {{enseignant.label}}
+              <option *ngFor="let enseignant of enseignants;let i=index" value="{{i}}">
+                {{enseignant.nom}}
               </option>
             </select>
           </div>
-      
+
+
         </div>
       </div>
     </div>
-
 
 
   <table class="table datatable-html">
@@ -68,17 +62,14 @@
 
     <tr *ngFor="let stage of stages">
       <td>{{stage.id_Stage}}</td>
-      <td><span class="label label-info">eeeee{{stage.date_debut}}</span></td>
+      <td><span class="label label-info">{{stage.date_debut}}</span></td>
       <td><span class="label label-info">{{stage.date_fin}}</span></td>
       <td><span class="label label-info">{{stage.id_Enseignant}}</span></td>
       <td><span class="label label-info">{{stage.id_Hopital}}</span></td>
       <td><span class="label label-info">{{stage.id_Service}}</span></td>
     </tr>
 
-    <tr>
-<td>aaaa</td>
-<td>bbbbb</td>
-    </tr>
+
     </tbody>
   </table>
 </div>
