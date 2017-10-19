@@ -1,11 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterContentInit, OnDestroy} from '@angular/core';
 import {StageService} from "../../../shared/services/stage.service";
 import {Stage} from "../../../shared/models/stage";
 
-
+import {SharedService} from "../../../shared/services/shared.service";
 import {Enseignant} from "../../../shared/models/enseignant";
 import {Utils} from "app/shared/utils";
+
+
+
+import {Router} from '@angular/router';
+
+import {Subscription} from "rxjs/Rx";
+
 declare var jQuery:any;
+
+
+
 
 @Component({
   templateUrl: 'list-archive.component.html',
@@ -18,17 +28,49 @@ export class ArchiveComponent implements OnInit {
   fixStages: Stage[] = [];
 
 enseignants: Enseignant[] = [];
+enseignantss: Enseignant[] = [];
 fixEnseignants: Enseignant[] = [];
 
 
+
+
+selectedEnseignants: Enseignant[] = [];
+
+
+
+
+
   ngOnInit() {
+
+  const baseContext = this;
+    const selectEnseignant = jQuery(".select-enseignant");
+
+
+  selectEnseignant.select2();
+  this.getAllEnseignants();
     this.getListStages();
     this.getListEnseignants();
+
+
+
+
   }
 
-  constructor(private stageService: StageService) {
-    this.initializeSelectEnseig();
 
+  constructor(private stageService: StageService,
+              private sharedService: SharedService,
+            private router: Router) {
+this.initializeSelectEnseig();
+  }
+
+  onchange(id) {
+    const selectEnseig = jQuery(".select-enseignant").val();
+    this.stages = [];
+    this.fixStages.forEach(stage => {
+      if ((stage.id_Enseignant == selectEnseig) || (selectEnseig == 0)) {
+          this.stages.push(stage);
+      }
+    });
   }
 
   getListStages() {
@@ -67,6 +109,19 @@ fixEnseignants: Enseignant[] = [];
   }
 
 
+  getAllEnseignants() {
+    this.sharedService.getAllEnseignant()
+      .subscribe(
+        (data) => {
+          this.enseignantss = data.data;
+        }
+      )
+  }
+
+  removeSelectedEnseignant(pos) {
+    this.selectedEnseignants.splice(pos, 1);
+  }
+
 //  evaluateurs: Admin[] = [];
   private initializeSelectEnseig() {
       const selectEnseig = jQuery(".select-enseignant");
@@ -79,7 +134,7 @@ fixEnseignants: Enseignant[] = [];
           baseContext.fixStages = baseContext.stages;
         } else {
           baseContext.fixStages.forEach(stage => {
-            if (stage.id_Enseignant === +jQuery(this).val()) {
+            if (stage.id_Enseignant === +jQuery(this).val() && stage.date_fin < "2") {
               baseContext.fixStages.push(stage);
             }
           });
@@ -89,5 +144,12 @@ fixEnseignants: Enseignant[] = [];
     }
 
 
+
+
+
+    ngOnDestroy() {
+    }
+
+    
 
 }

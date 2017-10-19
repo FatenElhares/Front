@@ -38,14 +38,14 @@
           </div>
           <div class="form-group col-md-4">
             <label>Enseignant</label>
-            <select name="enseignant" class="select-enseignant">
+            <select name="enseignant" class="select-enseignant" (change)="onchange($event)">
               <option value="0">Tous les Enseignants</option>
-              <option *ngFor="let enseignant of Enseignants" value="{{enseignant.id_level}}">
-                {{enseignant.label}}
+              <option *ngFor="let enseignant of enseignants;let i=index" value="{{enseignant.id_Enseignant}}">
+                {{enseignant.nom}}
               </option>
             </select>
           </div>
-    
+
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ export const routes: Routes = [
 
       {
 
-      path: 'add/etudiant',
+      path: 'add/etudiant/:id',
       component: AddStageEtudiantComponent
     },
 

@@ -27,20 +27,18 @@
 
       <div class="panel-body">
         <div class="row">
-
-
-
           <div class="form-group col-md-6" style="    margin-right: 10px;">
             <label>Enseignants :</label>
-            <select name="enseignant" class="select-enseignant">
+            <select name="enseignant" class="select-enseignant" (change)="onchange($event)">
               <option value="0">Tous les Enseignants</option>
-              <option *ngFor="let enseignant of enseignants;let i=index" value="{{i}}">
+              <option *ngFor="let enseignant of enseignants;let i=index" value="{{enseignant.id_Enseignant}}">
                 {{enseignant.nom}}
               </option>
             </select>
+
+
+
           </div>
-
-
         </div>
       </div>
     </div>

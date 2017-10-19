@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {StageService} from "../../../shared/services/stage.service";
 import {Stage} from "../../../shared/models/stage";
+
+import {Subscription} from "rxjs/Rx";
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Utils} from "app/shared/utils";
 declare var jQuery:any;
 
@@ -12,25 +15,29 @@ declare var jQuery:any;
 export class ListStagesComponent implements OnInit {
 
   stages: Stage[] = [];
-
   fixStages: Stage[] = [];
+  id=1;
 
+  busy: Subscription;
   ngOnInit() {
     this.getListStages();
   }
 
-  constructor(private stageService: StageService) {
-    this.initializeSelectAdmin();
-    this.initializeSelectDateBefore();
-    this.initializeSelectDateBefore();
+  constructor(  private route: ActivatedRoute,
+    private router: Router,private stageService: StageService) {
   }
 
   getListStages() {
+    //let id = this.route.snapshot.paramMap.get('id');
     this.stageService.getListStages()
       .subscribe(
         (stages) => {
-          this.stages = stages.data;
           this.fixStages = stages.data;
+          this.fixStages.forEach(stage => {
+            if (stage.id_Enseignant == 3) {
+                this.stages.push(stage);
+            }
+          });
           Utils.initializeDataTables(300, 7, 5);
         },
         (error) => {
@@ -39,56 +46,15 @@ export class ListStagesComponent implements OnInit {
       )
   }
 
-  private initializeSelectAdmin() {
-      const selectEnseignant = jQuery(".select-enseignant");
-      const baseContext = this;
-      selectEnseignant.select2();
-
-      selectEnseignant.on("change", function () {
-        baseContext.stages = [];
-        if (+jQuery(this).val() == 0) {
-          baseContext.stages = baseContext.fixStages;
-        } else {
-          baseContext.fixStages.forEach(stage => {
-            if (stage.id_Enseignant === +jQuery(this).val()) {
-                baseContext.stages.push(stage);
-            }
-          });
-        }
-      //  Utils.reInitializeDataTables(50, 6);
-      });
-    }
-
-    private initializeSelectDateBefore() {
-        const selectEnseignant = jQuery(".select-date-before");
-        const baseContext = this;
-
-        selectEnseignant.on("click", function () {
-          baseContext.stages = [];
-
-          baseContext.fixStages.forEach(stage => {
-            if (stage.date_fin < new Date().toString()) {
-                baseContext.stages.push(stage);
-            }
-          });
-        //  Utils.reInitializeDataTables(50, 6);
-        });
-      }
 
 
-      private initializeSelectDateAfter() {
-          const selectEnseignant = jQuery(".select-date-after");
-          const baseContext = this;
+  ListeEtudiant(stage: Stage) {
+  //  console.log(JSON.stringify(this.stage));
 
-          selectEnseignant.on("click", function () {
-            baseContext.stages = [];
 
-            baseContext.fixStages.forEach(stage => {
-              if (stage.date_fin >= new Date().toString()) {
-                  baseContext.stages.push(stage);
-              }
-            });
-          //  Utils.reInitializeDataTables(50, 6);
-          });
-        }
+    this.router.navigate(['/stageenseig/listetudiant' + stage.id_Stage]);
+
+
+  }
+
 }

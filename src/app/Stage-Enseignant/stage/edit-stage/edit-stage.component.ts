@@ -1,19 +1,25 @@
 import {Component, OnInit, AfterContentInit, OnDestroy} from '@angular/core';
 
 import {StageService} from "../../../shared/services/stage.service";
+
+
+import {EtudiantService} from "../../../shared/services/etudiant.service";
+
 import {SharedService} from "../../../shared/services/shared.service";
 
 
 import {Service} from "../../../shared/models/service";
-import {Hopital} from "../../../shared/models/hopital";
+
 
 
 import {Stage} from "../../../shared/models/stage";
-import {StageDTO} from "../../../shared/models/stage";
+import {Etudiant_StageDTO} from "../../../shared/models/etudiant_stage";
+
+import {Etudiant_Stage} from "../../../shared/models/etudiant_stage";
 
 import {Enseignant} from "../../../shared/models/enseignant";
 import {Etudiant} from "../../../shared/models/etudiant";
-
+import {Router} from '@angular/router';
 
 import {Subscription} from "rxjs/Rx";
 declare var jQuery: any;
@@ -24,94 +30,72 @@ declare var jQuery: any;
 })
 export class EditStageComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  services: Service[] = [];
-  hopitaux: Hopital[] = [];
-  stage: StageDTO = new StageDTO();
-  enseignants: Enseignant [] = [];
+
+  etudiant_stage: Etudiant_StageDTO = new Etudiant_StageDTO
+
 
   etudiants: Etudiant [] = [];
-
+stages: Stage [] = [];
   selectedEnseignants: Enseignant[] = [];
   selectedEtudiants: Etudiant[] = [];
+
+  selectedStages: Stage[] = [];
 
 
   busy: Subscription;
 
   ngOnInit() {
     const baseContext = this;
-    const selectService = jQuery(".select-service");
-    const selectEnseignant = jQuery(".select-enseignant");
+
+
     const selectEtudiant = jQuery(".select-etudiant");
+    const selectStage = jQuery(".select-stage");
 
 
-    this.getAllServices();
-    this.getAllEnseignants();
     this.getAllEtudiants();
-
-    selectService.select2();
-    selectEnseignant.select2();
-
     selectEtudiant.select2();
+    this.getAllStages();
+    selectStage.select2();
 
 
-    selectEnseignant.on('change', function () {
 
-      const pos = parseInt(selectEnseignant.val());
-      baseContext.selectedEnseignants.push(baseContext.enseignants[pos]);
-    });
 
     selectEtudiant.on('change', function () {
-
       const pos = parseInt(selectEtudiant.val());
       baseContext.selectedEtudiants.push(baseContext.etudiants[pos]);
     });
 
 
-    selectService.on("change", function () {
-      baseContext.stage.id_Service = parseInt(selectService.val());
-    });
 
-    jQuery(".date-debut").on("change", function () {
-      baseContext.stage.date_debut = jQuery(".date-debut").val();
-    });
-    jQuery(".date-fin").on("change", function () {
-      baseContext.stage.date_fin = jQuery(".date-fin").val();
-    })
+
+
+  selectStage.on('change', function () {
+    const pos = parseInt(selectStage.val());
+    baseContext.selectedStages.push(baseContext.stages[pos]);
+  });
+
   }
 
-  getAllServices() {
-    this.sharedService.getServices()
-      .subscribe((data) => {
-          this.services = data;
-          console.log(this.services);
-        },
-        (error) => {
-
-        });
-  }
-
-  getAllEnseignants() {
-    this.sharedService.getAllEnseignant()
-      .subscribe(
-        (data) => {
-          this.enseignants = data;
-        }
-      )
-  }
 
 
   getAllEtudiants() {
     this.sharedService.getAllEtudiant()
       .subscribe(
         (data) => {
-          this.etudiants = data;
+          this.etudiants = data.data;
         }
       )
   }
 
 
-  removeSelectedEnseignant(pos) {
-    this.selectedEnseignants.splice(pos, 1);
+
+  getAllStages() {
+    this.sharedService.getAllStage()
+      .subscribe(
+        (data) => {
+          this.stages = data.data;
+        }
+      )
   }
 
 
@@ -119,6 +103,10 @@ export class EditStageComponent implements OnInit, AfterContentInit, OnDestroy {
     this.selectedEtudiants.splice(pos, 1);
   }
 
+
+  removeSelectedStage(pos) {
+    this.selectedStages.splice(pos, 1);
+  }
   ngAfterContentInit() {
     // Date and time
     // Single picker
@@ -148,7 +136,8 @@ export class EditStageComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   constructor(private stageService: StageService,
-              private sharedService: SharedService) {
+              private sharedService: SharedService,
+            private router: Router) {
 
   }
 
@@ -156,33 +145,34 @@ export class EditStageComponent implements OnInit, AfterContentInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  setEnseignant() {
-    this.selectedEnseignants.forEach(item => {
-      this.stage.enseignants.push(item.id_Enseignant);
-    });
-  }
+
 
 
   setEtudiant() {
     this.selectedEtudiants.forEach(item => {
-      this.stage.etudiants.push(item.id_Etudiant);
+      this.etudiant_stage.etudiants.push(item.id_Etudiant);
     });
   }
 
-  editStage() {
-    this.setEnseignant();
-    this.setEtudiant();
-    console.log(JSON.stringify(this.stage));
 
-    this.busy = this.stageService.addStage(this.stage)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
+  setStage() {
+    this.selectedStages.forEach(item => {
+      this.etudiant_stage.stages.push(item.id_Stage);
+    });
+  }
+  addStage() {
+  //  console.log(JSON.stringify(this.etudiant_stage));
 
-        }
-      )
+    //this.busy = this.stageService.addStage(this.etudiant_stage)
+      //.subscribe(
+        //(data) => {
+          //console.log(data.id);
+            //      this.router.navigate(['/Stage/add/etudiant/' + data.id]);
+        //},
+        //(error) => {
+
+        //}
+      //)
   }
 
 

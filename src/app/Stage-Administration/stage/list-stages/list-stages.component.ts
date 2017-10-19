@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {StageService} from "../../../shared/services/stage.service";
 import {Stage} from "../../../shared/models/stage";
+
+import {Enseignant} from "../../../shared/models/enseignant";
+
+
 import {Utils} from "app/shared/utils";
 declare var jQuery:any;
 
@@ -14,14 +18,29 @@ export class ListStagesComponent implements OnInit {
   stages: Stage[] = [];
 
   fixStages: Stage[] = [];
+  enseignants: Enseignant[] = [];
+
+  fixed: Stage[] = [];
+  fixEnseignants: Enseignant[] = [];
 
   ngOnInit() {
     this.getListStages();
+    this.getListEnseignants();
   }
 
   constructor(private stageService: StageService) {
-    this.initializeSelectAdmin();
-    }
+    this.initializeSelectEnseig();
+  }
+
+  onchange(id) {
+    const selectEnseig = jQuery(".select-enseignant").val();
+    this.stages = [];
+    this.fixStages.forEach(stage => {
+      if ((stage.id_Enseignant == selectEnseig) || (selectEnseig == 0)) {
+          this.stages.push(stage);
+      }
+    });
+  }
 
   getListStages() {
 
@@ -41,19 +60,38 @@ export class ListStagesComponent implements OnInit {
       )
   }
 
-  private initializeSelectAdmin() {
-      const selectEnseignant = jQuery(".select-enseignant");
-      const baseContext = this;
-      selectEnseignant.select2();
+  getListEnseignants() {
+    this.stageService.getListEnseignants()
+      .subscribe(
+        (enseignants) => {
+          this.enseignants = enseignants.data;
+          this.fixEnseignants = enseignants.data;
+          Utils.initializeDataTables(300, 7, 5);
 
-      selectEnseignant.on("change", function () {
-        baseContext.stages = [];
+        },
+        (error) => {
+
+        }
+      )
+  }
+
+
+
+  private initializeSelectEnseig() {
+
+
+      const selectEnseig = jQuery(".select-enseignant");
+      const baseContext = this;
+      selectEnseig.select2();
+
+      selectEnseig.on("change", function () {
+        baseContext.fixed = [];
         if (+jQuery(this).val() == 0) {
-          baseContext.stages = baseContext.fixStages;
+          baseContext.fixed = baseContext.fixStages;
         } else {
-          baseContext.fixStages.forEach(stage => {
-            if (stage.id_Enseignant === +jQuery(this).val()) {
-                baseContext.stages.push(stage);
+          baseContext.fixed.forEach(stage => {
+            if (stage.id_Enseignant === +jQuery(this).val() && stage.date_fin >"2") {
+              baseContext.fixed.push(stage);
             }
           });
         }

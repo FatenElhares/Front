@@ -6,7 +6,7 @@ import {NgModule} from '@angular/core';
 import {StageEtudiantRoutingModule} from "./Stage-Etudiant.routing";
 import {ListStagesComponent} from "app/Stage-Etudiant/stage/list-stages/list-stages.component";
 import {CommonModule} from "@angular/common";
-import {AffStageComponent} from "./stage/aff-stage/aff-stage.component";
+
 import {DateTimePickerModule} from 'ng-pick-datetime';
 import {BusyModule} from 'angular2-busy';
 
@@ -21,7 +21,7 @@ import {BusyModule} from 'angular2-busy';
   ],
   declarations: [
     ListStagesComponent,
-    AffStageComponent
+
   ],
   providers: []
 })

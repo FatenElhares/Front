@@ -18,19 +18,19 @@
     <tr>
       <th>#</th>
       <th>Date debut</th>
-      <th>Date fin</th>
-      <th>Hopital</th>
-      <th>Service</th>
-      <th>Etudiants</th>
+      <th>Note</th>
+      <th>Motif</th>
+      <th>Evaluation</th>
+
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let stage of stages">
-      <td>{{stage.id_Stage}}</td>
-      <td><span class="label label-info">{{stage.date_debut}}</span></td>
-      <td><span class="label label-info">{{stage.date_fin}}</span></td>
-      <td><span class="label label-info">{{stage.id_Hopital}}</span></td>
-      <td><span class="label label-info">{{stage.id_Service}}</span></td>
+    <tr *ngFor="let etudiant_stage of etudiants_stages">
+      <td>{{etudiant_stage.id_Etudiant_Stage}}</td>
+      <td><span class="label label-info">{{etudiant_stage.id_Etudiant}}</span></td>
+      <td><span class="label label-info">{{etudiant_stage.note}}</span></td>
+      <td><span class="label label-info">{{etudiant_stage.motif}}</span></td>
+
       <td>
 
 

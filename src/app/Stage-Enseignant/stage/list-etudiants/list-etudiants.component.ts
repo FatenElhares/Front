@@ -8,11 +8,11 @@ import {Utils} from "app/shared/utils";
 declare var jQuery:any;
 
 @Component({
-  templateUrl: 'list-stages.component.html',
+  templateUrl: 'list-etudiants.component.html',
   styleUrls: [],
 
 })
-export class ListStagesComponent implements OnInit {
+export class ListEtudiantsComponent implements OnInit {
 
   etudiants_stages: Etudiant_Stage[] = [];
   fix: Etudiant_Stage[] = [];

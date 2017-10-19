@@ -35,6 +35,19 @@ export class SharedService extends GenericService {
       .catch(this.handleErrors);
   }
 
+
+
+    getAllStage() {
+      this.headers.set("Authorization", "Bearer " + this.stoarageService.read("token"));
+      const url = Config.baseUrl + "/stage";
+
+      return this.http.get(url, {
+        headers: this.headers
+      })
+        .map(res => res.json())
+        .catch(this.handleErrors);
+    }
+
   getAllTypes() {
     this.headers.set("Authorization", "Bearer " + this.stoarageService.read("token"));
     const url = Config.baseUrl + "/stage";

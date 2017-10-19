@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
 import {StageEnseignantRoutingModule} from "./Stage-Enseignant.routing";
 import {ListStagesComponent} from "app/Stage-Enseignant/stage/list-stages/list-stages.component";
+import {ListEtudiantsComponent} from "app/Stage-Enseignant/stage/list-etudiants/list-etudiants.component";
 import {CommonModule} from "@angular/common";
 import {EditStageComponent} from "./stage/edit-stage/edit-stage.component";
 import {DateTimePickerModule} from 'ng-pick-datetime';
@@ -21,7 +22,8 @@ import {BusyModule} from 'angular2-busy';
   ],
   declarations: [
     ListStagesComponent,
-    EditStageComponent
+    EditStageComponent,
+    ListEtudiantsComponent
   ],
   providers: []
 })

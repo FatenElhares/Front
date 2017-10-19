@@ -19,9 +19,9 @@
 
         <div class="form-group col-md-6" style="    margin-right: 10px;">
           <label>Hopital :</label>
-          <select name="enseignant" class="select-enseignant">
+          <select name="hopital" class="select-hopital">
             <option value="0">Choisir un Hopital</option>
-            <option *ngFor="let item of enseignants;let i=index" value="{{i}}">
+            <option *ngFor="let item of hopitaux;let i=index" value="{{item.id_Hopital}}">
               {{item.nom}}
             </option>
           </select>
@@ -32,7 +32,7 @@
           <select name="service" class="select-service">
             <option value="0">Choisir un service</option>
             <option *ngFor="let item of services;let i=index" value="{{i}}">
-              {{item.nomservice}}}
+              {{item.nomservice}}
             </option>
           </select>
         </div>
@@ -72,10 +72,8 @@
 
 
 
-            <form method="get" [routerLink]="['/Stage/add/etudiant']" >
-              <button type="submit" class="btn btn-primary">Choisir des Etudiants
+              <button type="submit" class="btn btn-primary" (click)="addStage()">Choisir des Etudiants
                 <i class="icon-arrow-right14 position-right"></i></button>
-            </form>
 
 
         </div>

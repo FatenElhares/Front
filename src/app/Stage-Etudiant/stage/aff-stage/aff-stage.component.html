@@ -1,7 +1,7 @@
-<!-- Form horizontal -->
+<!-- HTML sourced data -->
 <div class="panel panel-flat">
   <div class="panel-heading">
-    <h5 class="panel-title">Fiche d'evaluation</h5>
+    <h5 class="panel-title">Fiche Etudiant</h5>
     <div class="heading-elements">
       <ul class="icons-list">
         <li><a data-action="collapse"></a></li>
@@ -11,47 +11,30 @@
     </div>
   </div>
 
-  <div class="panel-body">
-
-    <form class="form-horizontal" action="#">
-
-      <div class="row">
-
-            <div class="col-md-6">
-              <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Compétence</th>
-                  <th>Valeur</th>
-                  <th>Dereniére Modif</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of selectedEnseignants;let i=index">
-                  <td>{{item.id_Etudiant}}</td>
-                  <td>{{item.CIN}}</td>
-                  <td>{{item.nom}} {{item.prenom}}</td>
-                  <td>
-                    <a (click)="removeSelectedEtudiant(i)" data-popup="tooltip" title="Remove"><i class="icon-trash"></i></a>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <!-- /bordered striped table -->
-          </div>
 
 
-<br><br>
+  <table class="table datatable-html ">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>ethique</th>
+      <th>gestionnaire</th>
+      <th>organisation</th>
+      <th>collaboration</th>
+      <th>professionnalisme</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let competences of competencess">
+      <td>{{competences.id_Competences}}</td>
+      <td><span class="label label-info">{{competences.ethique}}</span></td>
+      <td><span class="label label-info">{{competences.gestionnaire}}</span></td>
+      <td><span class="label label-info">{{competences.organisation}}</span></td>
+      <td><span class="label label-info">{{competences.collaboration}}</span></td>
+      <td><span class="label label-info">{{competences.professionnalisme}}</span></td>
 
-      <div class="row text-center">
-        <button type="submit" (click)="affStage()" class="btn btn-primary">Ajouter Commentaire <i
-          class="icon-arrow-right14 position-right"></i></button>
-      </div>
-    </form>
-  </div>
+    </tr>
+    </tbody>
+  </table>
 </div>
-
-
-<!-- /form horizontal -->
+<!-- /HTML sourced data -->

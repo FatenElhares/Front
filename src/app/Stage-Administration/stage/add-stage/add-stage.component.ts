@@ -17,7 +17,7 @@ import {StageDTO} from "../../../shared/models/stage";
 
 import {Enseignant} from "../../../shared/models/enseignant";
 import {Etudiant} from "../../../shared/models/etudiant";
-
+import {Router} from '@angular/router';
 
 import {Subscription} from "rxjs/Rx";
 declare var jQuery: any;
@@ -46,7 +46,10 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
     const selectService = jQuery(".select-service");
     const selectEnseignant = jQuery(".select-enseignant");
     const selectEtudiant = jQuery(".select-etudiant");
+    const selectHopital = jQuery(".select-hopital");
 
+    this.getListHopitaux();
+    this.getListEnseignants();
 
     this.getAllServices();
     this.getAllEnseignants();
@@ -54,25 +57,31 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
 
     selectService.select2();
     selectEnseignant.select2();
-
     selectEtudiant.select2();
+    selectHopital.select2();
 
 
     selectEnseignant.on('change', function () {
+      baseContext.stage.id_Enseignant = parseInt(selectEnseignant.val());
+      console.log(baseContext.stage.id_Enseignant);
 
-      const pos = parseInt(selectEnseignant.val());
-      baseContext.selectedEnseignants.push(baseContext.enseignants[pos]);
+
     });
 
     selectEtudiant.on('change', function () {
-
       const pos = parseInt(selectEtudiant.val());
       baseContext.selectedEtudiants.push(baseContext.etudiants[pos]);
     });
 
+    selectHopital.on('change', function () {
+      baseContext.stage.id_Hopital = parseInt(selectHopital.val());
+      console.log(selectHopital.val());
+      console.log(baseContext.stage.id_Hopital);
+    });
 
     selectService.on("change", function () {
       baseContext.stage.id_Service = parseInt(selectService.val());
+      console.log(baseContext.stage.id_Service);
     });
 
     jQuery(".date-debut").on("change", function () {
@@ -83,14 +92,34 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
     })
   }
 
-  getAllServices() {
-    this.sharedService.getServices()
-      .subscribe((data) => {
-          this.services = data;
-          console.log(this.services);
+  getListHopitaux() {
+    this.stageService.getAllHopital()
+      .subscribe((hopitaux) => {
+          this.hopitaux = hopitaux.data;
         },
         (error) => {
 
+        });
+  }
+
+  getListEnseignants() {
+    this.stageService.getListEnseignants()
+      .subscribe(
+        (enseignants) => {
+          this.enseignants = enseignants.data;
+        },
+        (error) => {
+
+        }
+      )
+  }
+
+  getAllServices() {
+    this.stageService.getAllService()
+      .subscribe((services) => {
+          this.services = services.data;
+        },
+        (error) => {
         });
   }
 
@@ -98,7 +127,7 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
     this.sharedService.getAllEnseignant()
       .subscribe(
         (data) => {
-          this.enseignants = data;
+          this.enseignants = data.data;
         }
       )
   }
@@ -108,7 +137,7 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
     this.sharedService.getAllEtudiant()
       .subscribe(
         (data) => {
-          this.etudiants = data;
+          this.etudiants = data.data;
         }
       )
   }
@@ -152,7 +181,8 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   constructor(private stageService: StageService,
-              private sharedService: SharedService) {
+              private sharedService: SharedService,
+            private router: Router) {
 
   }
 
@@ -161,8 +191,8 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   setEnseignant() {
-    this.selectedEnseignants.forEach(item => {
-      this.stage.enseignants.push(item.id_Enseignant);
+    this.selectedEnseignants.forEach(enseignant => {
+      this.stage.enseignants.push(enseignant.id_Enseignant);
     });
   }
 
@@ -174,14 +204,13 @@ export class AddStageComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   addStage() {
-    this.setEnseignant();
-    this.setEtudiant();
     console.log(JSON.stringify(this.stage));
 
     this.busy = this.stageService.addStage(this.stage)
       .subscribe(
         (data) => {
-          console.log(data);
+          console.log(data.id);
+                  this.router.navigate(['/Stage/add/etudiant/' + data.id]);
         },
         (error) => {
 

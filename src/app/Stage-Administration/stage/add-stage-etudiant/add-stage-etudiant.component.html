@@ -1,9 +1,5 @@
 
 <h2 class="example-h2">Liste des Etudiants </h2>
-
-
-
-
 <br> <br>
       <table class="table datatable-html">
         <thead>
@@ -23,9 +19,7 @@
             <mat-card>
               <mat-card-content>
                 <section class="example-section">
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Checked</mat-checkbox>
-
-
+                  <mat-checkbox class="example-margin" (change)="onchange(etudiant, $event.checked)"></mat-checkbox>
                 </section>
               </mat-card-content>
             </mat-card>
@@ -46,7 +40,5 @@
 
 
 
-            <form method="get" [routerLink]="['/Stage/add/etudiant']" >
-              <button type="submit" class="btn btn-primary">Ajouter Stage
+              <button type="submit" class="btn btn-primary" (click)="addStage()">Ajouter Stage
                 <i class="icon-arrow-right14 position-right"></i></button>
-            </form>

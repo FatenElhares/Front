@@ -1,7 +1,7 @@
 <!-- Form horizontal -->
 <div class="panel panel-flat">
   <div class="panel-heading">
-    <h5 class="panel-title">Evaluer un Stage </h5>
+    <h5 class="panel-title">Evaluer Stage</h5>
     <div class="heading-elements">
       <ul class="icons-list">
         <li><a data-action="collapse"></a></li>
@@ -17,24 +17,22 @@
       <div class="row">
 
 
-
         <div class="form-group col-md-6" style="    margin-right: 10px;">
-          <label>Etudiant :</label>
-          <select name="etudiant" class="select-etudiant">
-            <option value="0">Choisir un Etudiant</option>
-            <option *ngFor="let item of etudiants;let i=index" value="{{i}}">
-              {{item.nom}}
+          <label>Stage :</label>
+          <select name="stage" class="select-stage">
+            <option value="0">Choisir un Stage</option>
+            <option *ngFor="let item of hopitaux;let i=index" value="{{item.id_Stage}}">
+              {{item.id_Stage}}
             </option>
           </select>
         </div>
 
         <div class="form-group col-md-6" style="    margin-right: 10px;">
-          <label>Stage :</label>
-          <br>
-          <select name="stage" class="select-stage">
-            <option value="0">Choisir un stage</option>
-            <option *ngFor="let item of stagess;let i=index" value="{{i}}">
-              {{item.date-fin}}
+          <label>Etudiant : </label>
+          <select name="etudiant" class="select-etudiant">
+            <option value="0">Choisir un etudiant</option>
+            <option *ngFor="let item of etudiants;let i=index" value="{{i}}">
+              {{item.nom}}
             </option>
           </select>
         </div>
@@ -59,29 +57,30 @@
       </div>
 
       <div class="row">
+        <div class="form-group col-md-6" style="    margin-right: 10px;">
+          <label>Enseignant Responsable : </label>
+          <select name="enseignant" class="select-enseignant">
+            <option value="0">Choisir enseignant responsable</option>
+            <option *ngFor="let item of enseignants;let i=index" value="{{i}}">
+              {{item.nom}} {{item.prenom}}
+            </option>
+          </select>
+        </div>
+<br> <br>
+        <div class="row text-center">
 
+
+
+
+              <button type="submit" class="btn btn-primary" (click)="addStage()">Choisir des Etudiants
+                <i class="icon-arrow-right14 position-right"></i></button>
+
+
+        </div>
       </div>
 
-      <div class="row">
-            <div class="form-group col-md-6">
-              <label>xxx</label>
-              <select name="etudiant" class="select-etudiant">
-                <option value="0">Choisir un étudiant </option>
-                <option *ngFor="let item of etudiants;let i=index" value="{{i}}">
-                  {{item.nom}} {{item.prenom}} {{item.prenom}}
-                </option>
-              </select>
-            </div>
-
-          </div>
 
 
-<br><br>
-
-      <div class="row text-center">
-        <button type="submit" (click)="EditStage()" class="btn btn-primary">Ajouter Stage <i
-          class="icon-arrow-right14 position-right"></i></button>
-      </div>
     </form>
   </div>
 </div>
